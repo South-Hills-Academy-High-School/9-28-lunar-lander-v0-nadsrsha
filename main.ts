@@ -6,6 +6,7 @@ namespace SpriteKind {
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     apple.ay = 0 * Math.sin(angle)
     apple.ax = 0 * Math.cos(angle)
+    fireball.setFlag(SpriteFlag.Invisible, false)
 })
 controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
     angle += 15 * (3.14 / 180)
@@ -18,9 +19,31 @@ controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
 })
 controller.A.onEvent(ControllerButtonEvent.Released, function () {
     apple.ay = 20
+    fireball.setFlag(SpriteFlag.Invisible, true)
 })
 let apple: Sprite = null
 let angle = 0
+let fireball: Sprite = null
+fireball = sprites.create(img`
+    . . . . . . . . . . . . . . . . 
+    . . . . . . 4 4 4 4 . . . . . . 
+    . . . . 4 4 4 5 5 4 4 4 . . . . 
+    . . . 3 3 3 3 4 4 4 4 4 4 . . . 
+    . . 4 3 3 3 3 2 2 2 1 1 4 4 . . 
+    . . 3 3 3 3 3 2 2 2 1 1 5 4 . . 
+    . 4 3 3 3 3 2 2 2 2 2 5 5 4 4 . 
+    . 4 3 3 3 2 2 2 4 4 4 4 5 4 4 . 
+    . 4 4 3 3 2 2 4 4 4 4 4 4 4 4 . 
+    . 4 2 3 3 2 2 4 4 4 4 4 4 4 4 . 
+    . . 4 2 3 3 2 4 4 4 4 4 2 4 . . 
+    . . 4 2 2 3 2 2 4 4 4 2 4 4 . . 
+    . . . 4 2 2 2 2 2 2 2 2 4 . . . 
+    . . . . 4 4 2 2 2 2 4 4 . . . . 
+    . . . . . . 4 4 4 4 . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    `, SpriteKind.Player)
+fireball.setFlag(SpriteFlag.Invisible, true)
+fireball.z = -10
 angle = 0
 tiles.setCurrentTilemap(tilemap`level1`)
 effects.clouds.startScreenEffect()
